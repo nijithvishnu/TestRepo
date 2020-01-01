@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <record name="record" javaclass="com.wm.util.Values">
+    <value name="node_type">record</value>
+    <value name="node_subtype">unknown</value>
+    <value name="node_nsName">AIAPOC.challengeManager.rs.engageVitality_.docTypes:ChallengeRewardsAvailable</value>
+    <value name="node_pkg">AIAPOC</value>
+    <value name="is_public">false</value>
+    <value name="field_name">ChallengeRewardsAvailable</value>
+    <value name="field_type">record</value>
+    <value name="field_dim">0</value>
+    <value name="originURI">file://C:\Users\nivi\Desktop\AIA Vitality\Functional requirements and Interface Specifications\AIA_ChallengeManager_20190806_v1.0.4.yaml</value>
+    <null name="field_opt"/>
+    <null name="wrapper_type"/>
+    <value name="nillable">true</value>
+    <null name="field_xmlns"/>
+    <value name="form_qualified">false</value>
+    <value name="is_global">false</value>
+    <array name="rec_fields" type="record" depth="1">
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">rewardTier</value>
+        <value name="field_type">string</value>
+        <value name="field_dim">0</value>
+        <null name="field_opt"/>
+        <null name="wrapper_type"/>
+        <value name="nillable">true</value>
+        <null name="field_xmlns"/>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">rewardCode</value>
+        <value name="field_type">string</value>
+        <value name="field_dim">0</value>
+        <null name="field_opt"/>
+        <null name="wrapper_type"/>
+        <value name="nillable">true</value>
+        <null name="field_xmlns"/>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">rewardQuantity</value>
+        <value name="field_type">string</value>
+        <value name="field_dim">0</value>
+        <null name="field_opt"/>
+        <null name="wrapper_type"/>
+        <value name="nillable">true</value>
+        <null name="field_xmlns"/>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">rewardValue</value>
+        <value name="field_type">string</value>
+        <value name="field_dim">0</value>
+        <null name="field_opt"/>
+        <null name="wrapper_type"/>
+        <value name="nillable">true</value>
+        <null name="field_xmlns"/>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">rewardMetric</value>
+        <value name="field_type">string</value>
+        <value name="field_dim">0</value>
+        <null name="field_opt"/>
+        <null name="wrapper_type"/>
+        <value name="nillable">true</value>
+        <null name="field_xmlns"/>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">rewardType</value>
+        <value name="field_type">string</value>
+        <value name="field_dim">0</value>
+        <null name="field_opt"/>
+        <null name="wrapper_type"/>
+        <value name="nillable">true</value>
+        <null name="field_xmlns"/>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">rewardExpiryType</value>
+        <value name="field_type">string</value>
+        <value name="field_dim">0</value>
+        <null name="field_opt"/>
+        <null name="wrapper_type"/>
+        <value name="nillable">true</value>
+        <null name="field_xmlns"/>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">rewardExpiryPeriod</value>
+        <value name="field_type">string</value>
+        <value name="field_dim">0</value>
+        <null name="field_opt"/>
+        <null name="wrapper_type"/>
+        <value name="nillable">true</value>
+        <null name="field_xmlns"/>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">field</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">rewardExpiryPeriodType</value>
+        <value name="field_type">string</value>
+        <value name="field_dim">0</value>
+        <null name="field_opt"/>
+        <null name="wrapper_type"/>
+        <value name="nillable">true</value>
+        <null name="field_xmlns"/>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+      </record>
+    </array>
+    <null name="rec_closed"/>
+    <null name="rec_sync_des"/>
+    <null name="schemaRegistered"/>
+    <value name="originURI">file://C:\Users\nivi\Desktop\AIA Vitality\Functional requirements and Interface Specifications\AIA_ChallengeManager_20190806_v1.0.4.yaml</value>
+    <value name="modifiable">false</value>
+    <null name="schemaCompliant"/>
+    <null name="elementWrapper"/>
+    <null name="wrappedElement"/>
+    <value name="LOCK_REQUIRED">false</value>
+  </record>
+</Values>
