@@ -1,0 +1,41 @@
+pipeline {  
+    agent any
+    stages {
+	
+	    stage("Code checkout") {
+            steps {
+                echo "Code checkout..."
+				
+				bat "C:/Users/nivi/AppData/Local/Programs/Git/bin/git.exe rm -r C:/Projects/CI/CI-WORKSPACE/RESOURCES/JENKINS_WORKSPACE"
+				
+			    bat "C:/Users/nivi/AppData/Local/Programs/Git/bin/git.exe clone https://github.com/nijithvishnu/TestRepo.git C:/Projects/CI/CI-WORKSPACE/RESOURCES/JENKINS_WORKSPACE"
+            }
+        }
+        
+        stage("Build") {
+            steps {
+                echo "Build Started..."
+                	withAnt(installation: 'ANT HOME') {
+					   bat "ant build -f C:/SoftwareAG/common/AssetBuildEnvironment/master_build/build.xml"
+					}
+            }
+        }
+		stage("CreateProject") {
+            steps {
+                echo "CreateProject Started..."
+			        withAnt(installation: 'ANT HOME') {
+					   bat "ant createProject -f C:/SoftwareAG/common/AssetBuildEnvironment/master_build/build.xml"
+					}
+            }
+        }
+		stage("Deploy") {
+            steps {
+                echo "Deploy Started..."
+			        withAnt(installation: 'ANT HOME') {
+					   bat "ant DeployProject -f C:/SoftwareAG/common/AssetBuildEnvironment/master_build/build.xml"
+					}
+            }
+        }
+        
+    }     
+}
