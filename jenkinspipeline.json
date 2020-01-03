@@ -30,7 +30,7 @@ pipeline {
 		stage("Test") {
             steps {
                 echo "Test Started..."
-			    bat "newman run C:\Users\nivi\Desktop\AIAVE.postman_collection.json"
+			    bat "newman run C:/Users/nivi/Desktop/AIAVE.postman_collection.json"
             }
         }
         
