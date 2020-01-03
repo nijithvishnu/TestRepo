@@ -1,0 +1,61 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.discovery.co.za/vitality" targetNamespace="http://schemas.discovery.co.za/vitality" elementFormDefault="qualified" version="1.0">
+   <xs:include schemaLocation="AIAStub.wsdl.getAttributes?xsd=xsd2"/>
+   <xs:include schemaLocation="AIAStub.wsdl.getAttributes?xsd=xsd5"/>
+   <xs:include schemaLocation="AIAStub.wsdl.getAttributes?xsd=xsd6"/>
+   <xs:complexType name="AttributeHistoryRequest">
+      <xs:complexContent>
+         <xs:extension base="RequestContext">
+            <xs:sequence>
+               <xs:element name="MaxResultsPerAttributeType" type="MaxResults" minOccurs="0" maxOccurs="1" nillable="true" default="999999">
+                  <xs:annotation>
+                     <xs:documentation>Defines the maximum number of results to return per assessment type.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="AssessmentSourceType" type="AssessmentSource" minOccurs="0" maxOccurs="1"/>
+               <xs:element name="AttributeSources" minOccurs="0">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element type="AttributeSource" name="AttributeSource" maxOccurs="unbounded" minOccurs="0">
+                           <xs:annotation>
+                              <xs:documentation>If no sources specified then obtain all attributes regardless of source.
+                      If no sources specified then obtain all attributes regardless of source, unless AssessmentSourceType element in AttributeHistoryRequestType is set,
+                      in which case return only attributes from the source type defined there (TRUSTED or UN-TRUSTED SOURCE).</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="Attributes" minOccurs="0">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element type="AttributeId" name="AttributeId" maxOccurs="unbounded" minOccurs="0">
+                           <xs:annotation>
+                              <xs:documentation>Defines which attribute types to search for i.e. 69 == gender.
+                      If none specified it means find all.</xs:documentation>
+                           </xs:annotation>
+                        </xs:element>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="AttributeSource">
+      <xs:annotation>
+         <xs:documentation>This lists the sources that are to be returned and results can be specified in a particular order.
+        If there are no sources specified then it means search for all sources.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="AssessmentType" type="AssessmentType" minOccurs="1"/>
+         <xs:element name="Order" type="xs:int" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>This is the priority of the search.
+            Priority 1 is the highest priority.
+            If more than one source has the same priority then the date's of the attributes come into play, sorted by latest attributes first, unless fromDate and toDate ordering becomes a factor,
+            see fromDate and toDate in AttributeHistoryRequestType.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>
