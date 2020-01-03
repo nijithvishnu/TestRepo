@@ -1,0 +1,19 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.discovery.co.za/vitality" targetNamespace="http://schemas.discovery.co.za/vitality" elementFormDefault="qualified" version="1.0">
+   <xs:include schemaLocation="AIAStub.wsdl.getAttributes?xsd=xsd1"/>
+   <xs:element name="AttributeHistoryRequestMessage">
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="AttributeHistoryRequest">
+               <xs:attribute name="schemaVersion" use="required">
+                  <xs:simpleType>
+                     <xs:restriction base="xs:float">
+                        <xs:minInclusive value="2.0"/>
+                        <xs:maxExclusive value="3.0"/>
+                     </xs:restriction>
+                  </xs:simpleType>
+               </xs:attribute>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

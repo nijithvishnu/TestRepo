@@ -1,0 +1,1761 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch0="http://schemas.discovery.co.za/vitality" xmlns:sch1="http://schemas.discovery.co.za/vitality" xmlns:sch10="http://schemas.discovery.co.za/vitality" xmlns:sch11="http://schemas.discovery.co.za/vitality" xmlns:sch12="http://schemas.discovery.co.za/vitality" xmlns:sch13="http://schemas.discovery.co.za/vitality" xmlns:sch14="http://schemas.discovery.co.za/vitality" xmlns:sch15="http://schemas.discovery.co.za/vitality" xmlns:sch16="http://schemas.discovery.co.za/vitality" xmlns:sch17="http://schemas.discovery.co.za/vitality" xmlns:sch18="http://schemas.discovery.co.za/vitality" xmlns:sch19="http://schemas.discovery.co.za/vitality" xmlns:sch2="http://schemas.discovery.co.za/vitality" xmlns:sch20="http://schemas.discovery.co.za/vitality" xmlns:sch3="http://schemas.discovery.co.za/vitality" xmlns:sch4="http://schemas.discovery.co.za/vitality" xmlns:sch5="http://schemas.discovery.co.za/vitality" xmlns:sch6="http://schemas.discovery.co.za/vitality" xmlns:sch7="http://schemas.discovery.co.za/vitality" xmlns:sch8="http://schemas.discovery.co.za/vitality" xmlns:sch9="http://schemas.discovery.co.za/vitality" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://schemas.discovery.co.za/vitality/definitions" targetNamespace="http://schemas.discovery.co.za/vitality/definitions">
+    <wsdl:types>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:simpleType name="NumericReference">
+                <xs:annotation>
+                    <xs:documentation>Numeric value used to represent IDs in Vitality.
+				The length is 15 Digit.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:unsignedLong">
+                    <xs:minInclusive value="1"/>
+                    <xs:maxInclusive value="999999999999999"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="EntityNumber">
+                <xs:annotation>
+                    <xs:documentation>This will be used to represent the 10 digit entity
+				number in Vitality.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="NumericReference">
+                    <xs:minInclusive value="1"/>
+                    <xs:maxInclusive value="9999999999"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="VitalityPolicyNumber">
+                <xs:annotation>
+                    <xs:documentation>This will be used to represent the 10 digit policy
+				number in Vitality.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="NumericReference">
+                    <xs:minInclusive value="1"/>
+                    <xs:maxInclusive value="9999999999"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="EventTypeMnemonic">
+                <xs:annotation>
+                    <xs:documentation>String value used to depict Name and Description in
+				ACC.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:minLength value="1"/>
+                    <xs:maxLength value="4"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="EventTypeNumber">
+                <xs:annotation>
+                    <xs:documentation>String value used to depict Name and Description in
+				ACC.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="NumericReference">
+                    <xs:minInclusive value="1"/>
+                    <xs:maxInclusive value="9999999999"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="EventScore">
+                <xs:annotation>
+                    <xs:documentation/>
+                </xs:annotation>
+                <xs:restriction base="xs:unsignedLong">
+                    <xs:minInclusive value="1"/>
+                    <xs:maxInclusive value="999999"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="WorkflowProcessNumber">
+                <xs:annotation>
+                    <xs:documentation/>
+                </xs:annotation>
+                <xs:restriction base="xs:unsignedLong">
+                    <xs:minInclusive value="1"/>
+                    <xs:maxInclusive value="999999999999999"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="EventNumber">
+                <xs:annotation>
+                    <xs:documentation>The unique (sequence) number of the event.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:unsignedLong">
+                    <xs:minInclusive value="1"/>
+                    <xs:maxInclusive value="999999999999999"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="ParentEventNumber">
+                <xs:annotation>
+                    <xs:documentation>The unique (sequence) number of the parent event.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:unsignedLong">
+                    <xs:minInclusive value="1"/>
+                    <xs:maxInclusive value="999999999999999"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="Role">
+                <xs:annotation>
+                    <xs:documentation/>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="Principal|Spouse|Adult|Child"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="Gender">
+                <xs:annotation>
+                    <xs:documentation/>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="M|F"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="Number">
+                <xs:annotation>
+                    <xs:documentation>Numeric identifier to map the answer to a
+				particular question</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:integer"/>
+            </xs:simpleType>
+            <xs:simpleType name="Id">
+                <xs:annotation>
+                    <xs:documentation>A unique identifier to identify the attribute</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:integer"/>
+            </xs:simpleType>
+            <xs:simpleType name="Value">
+                <xs:annotation>
+                    <xs:documentation>The value selected/entered as the answer to the
+				question</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string"/>
+            </xs:simpleType>
+            <xs:simpleType name="UploadType">
+                <xs:annotation>
+                    <xs:documentation>1 =&gt; answers, will map to attributes using
+				setups
+				2 =&gt; attributes, will use direct values
+				3 =&gt; answers,
+				will map to attributes using setups but using question identifiers
+				instead of id's</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:integer">
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="2"/>
+                    <xs:enumeration value="3"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="IdentifierKey">
+                <xs:annotation>
+                    <xs:documentation>Internationalised identifier to represent the
+				assessment type. This identifier takes precedence of any value
+				passed in for assessmentid.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="NormalisedToken">
+                    <xs:maxLength value="64"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="NormalisedToken">
+                <xs:annotation>
+                    <xs:documentation>Token that is ideal for keys, contains only characters....</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:token">
+                    <xs:pattern value="\c+">
+                        <xs:annotation>
+                            <xs:documentation>Only allows characters, see NMTOKEN.</xs:documentation>
+                        </xs:annotation>
+                    </xs:pattern>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="AttributeIdentifier">
+                <xs:restriction base="NormalisedToken">
+                    <xs:maxLength value="64"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="AttributeValue">
+                <xs:restriction base="xs:string">
+                    <xs:maxLength value="200"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="Title">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="MR"/>
+                    <xs:enumeration value="MRS"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="Language">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="E"/>
+                    <xs:enumeration value="A"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="PeriodAdjustment">
+                <xs:annotation>
+                    <xs:documentation>0 to -24; 0 for current period, -1 for previous
+				period, -2 for the period before that and so on</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:int">
+                    <xs:minInclusive value="-24"/>
+                    <xs:maxInclusive value="0"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="ProgramId">
+                <xs:annotation>
+                    <xs:documentation>ID identifying the relevant program.
+				2=VitalityWellness; 3=VitalityDrive Depending on the use a 0 might
+				be passed thru to represent all programs</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:int">
+                    <xs:minInclusive value="0"/>
+                    <xs:maxInclusive value="99"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="EffectiveDate">
+                <xs:annotation>
+                    <xs:documentation>Effective date for which request is made.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:date"/>
+            </xs:simpleType>
+            <xs:simpleType name="PlanValidation">
+                <xs:annotation>
+                    <xs:documentation>Validation,if any, on the event, like
+				None,ExceptKEYCLUB</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:minLength value="0"/>
+                    <xs:maxLength value="200"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="EventTypeDescription">
+                <xs:annotation>
+                    <xs:documentation>Description of the Event Type</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:minLength value="0"/>
+                    <xs:maxLength value="150"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="EventTypeFrequencyValidation">
+                <xs:annotation>
+                    <xs:documentation>&gt;Frequency of event occuring in the policy, like
+				OneAYear</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:minLength value="0"/>
+                    <xs:maxLength value="200"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="EventTypeEntityValidation">
+                <xs:annotation>
+                    <xs:documentation>Validation on entity role for a event, like
+				PrincipalOrSpouseOrAdultDependant</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:minLength value="0"/>
+                    <xs:maxLength value="200"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="EventTypePointCalculation">
+                <xs:annotation>
+                    <xs:documentation>Type of points calculation, like
+				DefaultPointValue,ScoreAchieved etc.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:minLength value="0"/>
+                    <xs:maxLength value="200"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="EventTypePlanValidation">
+                <xs:annotation>
+                    <xs:documentation>Validation,if any, on the event, like
+				None,ExceptKEYCLUB</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:minLength value="0"/>
+                    <xs:maxLength value="200"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="AssessmentSource">
+                <xs:annotation>
+                    <xs:documentation>Indicator of Trusted vs non trusted sources.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="NormalisedToken">
+                    <xs:enumeration value="DontCare"/>
+                    <xs:enumeration value="Trusted"/>
+                    <xs:enumeration value="UnTrusted"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="AssessmentBasedTypeOfPrepopulation">
+                <xs:annotation>
+                    <xs:documentation>A prepopulation attribute can either be an attribute provided from a
+				previously completed assessment
+				or from an answer from a partially saved assessment.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="Attribute"/>
+                    <xs:enumeration value="Answer"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="StatusType">
+                <xs:annotation>
+                    <xs:documentation>Indicates the type of status being requested. All to return all statuses. OverallStatus for Overall Status. CurrentPeriodPointsStatus for the Points Status within each peroid.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="All"/>
+                    <xs:enumeration value="CurrentPeriodPointsStatus"/>
+                    <xs:enumeration value="OverallStatus"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="BenefitType">
+                <xs:annotation>
+                    <xs:documentation>Identifier for the benefit type</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:minLength value="0"/>
+                    <xs:maxLength value="7"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="BenefitComponentIdentifier">
+                <xs:annotation>
+                    <xs:documentation>Unique identifier/code for a component</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:minLength value="0"/>
+                    <xs:maxLength value="7"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="YesOrNo">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="Y"/>
+                    <xs:enumeration value="N"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:complexType name="DisplayGroup">
+                <xs:annotation>
+                    <xs:documentation>Individual display groups. Each vitality event is
+				grouped in event groups. This element describes the event group.</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="Id" type="xs:int">
+                        <xs:annotation>
+                            <xs:documentation>Numeric identifier for display group</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Order" type="xs:int">
+                        <xs:annotation>
+                            <xs:documentation>The display order of the display group</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Description">
+                        <xs:annotation>
+                            <xs:documentation>The description of display group</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Identifier">
+                        <xs:annotation>
+                            <xs:documentation>String identifier for the display group</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="60"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="VitalityBusinessFaultResponse">
+                <xs:annotation>
+                    <xs:documentation>Fault describing a business exception state</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="FaultCode" type="xs:long">
+                        <xs:annotation>
+                            <xs:documentation>Fault code associated with a business exception state</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="FaultMessage" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>Developer friendly message describing a business exception state</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="VitalityFaultResponse">
+                <xs:annotation>
+                    <xs:documentation>Fault describing a exception state</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="FaultCode" type="xs:long">
+                        <xs:annotation>
+                            <xs:documentation>Fault code associated with a exception state</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="FaultMessage" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>Developer friendly message describing a exception state</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="FaultMessageDetail" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>Detailed message describing the exception state</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Entity">
+                <xs:annotation>
+                    <xs:documentation>The entity on the policy</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="EntityNumber" type="EntityNumber">
+                        <xs:annotation>
+                            <xs:documentation>The entity number of the member belonging to the
+						policy.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Role">
+                        <xs:annotation>
+                            <xs:documentation>The role of the member in the policy, like
+						Principal,Spouse,Adult,Child etc</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Title">
+                        <xs:annotation>
+                            <xs:documentation>The title of the member like Mr, Mrs etc</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Initial">
+                        <xs:annotation>
+                            <xs:documentation>The initials of the member</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Firstname">
+                        <xs:annotation>
+                            <xs:documentation>The first name of the member</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Surname">
+                        <xs:annotation>
+                            <xs:documentation>The surname of the member</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Sex" type="Gender">
+                        <xs:annotation>
+                            <xs:documentation>Gender of the member</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="InactiveDate" nillable="true" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>If the policy is inactive for a member, the date
+						on which the policy was in-activated for the member</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="PreferredName">
+                        <xs:annotation>
+                            <xs:documentation>The preffered name of the member. This is picked
+						from the nick name</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EventType">
+                <xs:annotation>
+                    <xs:documentation>The details about the event type</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="EventTypeMnemonic" type="EventTypeMnemonic">
+                        <xs:annotation>
+                            <xs:documentation>A string identifier for the Event Type</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Description" type="EventTypeDescription">
+                        <xs:annotation>
+                            <xs:documentation>Description of the Event Type</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="FrequencyValidation" type="EventTypeFrequencyValidation">
+                        <xs:annotation>
+                            <xs:documentation>&gt;Frequency of event occuring in the policy, like
+						OneAYear</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="EntityValidation" type="EventTypeEntityValidation">
+                        <xs:annotation>
+                            <xs:documentation>Validation on entity role for a event, like
+						PrincipalOrSpouseOrAdultDependant</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="PointCalculation" type="EventTypePointCalculation">
+                        <xs:annotation>
+                            <xs:documentation>Type of points calculation, like
+						DefaultPointValue,ScoreAchieved etc.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="DefaultPointValue" type="xs:positiveInteger">
+                        <xs:annotation>
+                            <xs:documentation>Default Point Value for the Event Type</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="EventLifetime" type="xs:int">
+                        <xs:annotation>
+                            <xs:documentation>No of times the event can occur</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="PlanValidation" type="EventTypePlanValidation">
+                        <xs:annotation>
+                            <xs:documentation>Validation,if any, on the event, like
+						None,ExceptKEYCLUB</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="DisplayGroupId" type="xs:int">
+                        <xs:annotation>
+                            <xs:documentation>The id of the display group within which the
+						element is to be displayed</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="DisplayOrder" type="xs:int">
+                        <xs:annotation>
+                            <xs:documentation>The display order within the display group</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EventInfo">
+                <xs:annotation>
+                    <xs:documentation>The event that occurs within the period for the
+				entity</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="EntityNumber" type="EntityNumber">
+                        <xs:annotation>
+                            <xs:documentation>The entity number the event belongs to.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="EventDate" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>The date on which the event has occurred</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Points" type="xs:long">
+                        <xs:annotation>
+                            <xs:documentation>The points earned for the event</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Status">
+                        <xs:annotation>
+                            <xs:documentation>The status of event, the enumeration values are
+						listed below</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="1"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="RejectionReason">
+                        <xs:annotation>
+                            <xs:documentation>The reason for rejection of event, if event was
+						rejected</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="RejectionReasonIdentifier">
+                        <xs:annotation>
+                            <xs:documentation>The unique identifier code for the rejection
+						reason</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="120"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="EventNumber" type="EventNumber">
+                        <xs:annotation>
+                            <xs:documentation>The unique (sequence) number of the event.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="ParentEventNumber" type="ParentEventNumber">
+                        <xs:annotation>
+                            <xs:documentation>The unique (sequence) number of the parent event.
+						- If this is a child event</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EventTypeIdentifier">
+                <xs:annotation>
+                    <xs:documentation>Contains fields to identify the event type</xs:documentation>
+                </xs:annotation>
+                <xs:choice>
+                    <xs:element name="EventTypeMnemonic" type="EventTypeMnemonic">
+                        <xs:annotation>
+                            <xs:documentation>A string identifier for the event</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="EventTypeNumber" type="EventTypeNumber">
+                        <xs:annotation>
+                            <xs:documentation>A numeric identifier for the event</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:complexType>
+            <xs:complexType name="HealthAttribute">
+                <xs:annotation>
+                    <xs:documentation>The Attribute identifier and value being uploaded.</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="Identifier" type="AttributeIdentifier">
+                        <xs:annotation>
+                            <xs:documentation>Identifier for the attribute</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Value" type="AttributeValue">
+                        <xs:annotation>
+                            <xs:documentation>The value of the attribute</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Period">
+                <xs:annotation>
+                    <xs:documentation>The period in which points are accumulated to a
+				status</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="EffFrom" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>The start date of the period</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="EffTo" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>The end date of the period</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Points">
+                <xs:annotation>
+                    <xs:documentation>Information on total points in the period</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="PointsTotal" type="xs:int">
+                        <xs:annotation>
+                            <xs:documentation>Total points earned on the policy in the period</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="PointsToNextStatus" type="xs:int">
+                        <xs:annotation>
+                            <xs:documentation>The points needed to achieve the next status</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Status">
+                <xs:annotation>
+                    <xs:documentation>The status of the vitality policy. This status is
+				based on the points earned on the policy in the period</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="Number" type="xs:int">
+                        <xs:annotation>
+                            <xs:documentation>This element gives status number/code 1,2,3,4,5,6 as per environment</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Description">
+                        <xs:annotation>
+                            <xs:documentation>The text description of the status of the
+						vitality policy. The description is fixed for a given policy
+						status. The status will be like Blue, Bronze, Silver and Gold.</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Origin">
+                <xs:annotation>
+                    <xs:documentation>The originator of the status. This can be:
+				1:Points Calc Status
+				2:Partner Program Calc Status
+				3:Vitality Admin Status
+				4:Diamond Calc Status
+				5:Corporate Health Status
+				6:Boosted Status</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="Number" type="xs:int">
+                        <xs:annotation>
+                            <xs:documentation>The origin code, that is, 1,2,3,4,5,6... as per environment</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Description">
+                        <xs:annotation>
+                            <xs:documentation>The text description of the origin. These are, but not limited to the following:
+					Points Calc Status,
+					Partner Program Calc Status,
+					Vitality Admin Status,
+					Diamond Calc Status,
+					Corporate Health Status,
+					Boosted Status,....</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Threshold">
+                <xs:annotation>
+                    <xs:documentation>This element describes the threshold, that is point
+				range, for each status of the policy. The status will be like Blue,
+				Bronze, Silver and Gold. This is based on the points accumulated in
+				the policy</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="Status" type="Status">
+                        <xs:annotation>
+                            <xs:documentation>The status for threshold range</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="LowerLimit" type="xs:long">
+                        <xs:annotation>
+                            <xs:documentation>Lower limit of the threshold</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="UpperLimit" type="xs:long">
+                        <xs:annotation>
+                            <xs:documentation>Upper limit of the threshold</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ResultsFeedback">
+                <xs:annotation>
+                    <xs:documentation>This element describes the feedback generated after
+				the assessment is taken</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="Identifier" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>The text to be displayed in the header of the
+						result group</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="BaseDescription">
+                        <xs:annotation>
+                            <xs:documentation>The comment on the result</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="4000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ProcessingStatus">
+                <xs:sequence>
+                    <xs:element name="ReturnCode">
+                        <xs:simpleType>
+                            <xs:restriction base="NormalisedToken">
+                                <xs:maxLength value="64"/>
+                                <xs:enumeration value="SUCCESS"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="BenefitComponent">
+                <xs:annotation>
+                    <xs:documentation>A benefit componenent</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="BenefitComponentIdentifier" type="BenefitComponentIdentifier"/>
+                    <xs:element minOccurs="0" name="Description">
+                        <xs:annotation>
+                            <xs:documentation>Description of the benefit component</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="40"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="EffectiveFrom" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>The date from when this benefit component can be
+						offered.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="EffectiveTo" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>The date until when this benefit component can be
+						offered.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EntityBenefitComponent">
+                <xs:sequence>
+                    <xs:element name="EntityNumber" type="EntityNumber"/>
+                    <xs:element name="BenefitComponentIdentifier" type="BenefitComponentIdentifier"/>
+                    <xs:element minOccurs="0" name="Eligible" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="IneligibilityReasonIdentifier" type="xs:long"/>
+                    <xs:element minOccurs="0" name="IneligibilityReasonDescription" type="xs:string"/>
+                    <xs:element name="EffectiveFrom" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>The benefit start date for the entity</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="EffectiveTo" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>The benefit end date for the entity</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Benefit">
+                <xs:annotation>
+                    <xs:documentation>The benefit on the policy</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="BenefitType" type="BenefitType"/>
+                    <xs:element minOccurs="0" name="Description">
+                        <xs:annotation>
+                            <xs:documentation>The description of the benefit</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="40"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element maxOccurs="unbounded" name="BenefitComponent" type="BenefitComponent">
+                        <xs:annotation>
+                            <xs:documentation>The benefit component. A benefit will have
+                        multiple component.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:complexType name="PeriodWithChangeDateResponse">
+                <xs:annotation>
+                    <xs:documentation>The period in which points are accumulated to a
+				status</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="EffFrom" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>The start date of the period</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="EffTo" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>The end date of the period</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="StatusChngDt" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>Status Change Date(Last Modified Date)</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="StatusWithChangedBy">
+                <xs:annotation>
+                    <xs:documentation>The status of the vitality policy. This status is
+				based on the points earned on the policy in the period</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="Number" type="xs:int">
+                        <xs:annotation>
+                            <xs:documentation>This element gives status number/code 1,2,3,4,5,6 as per environment</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Description">
+                        <xs:annotation>
+                            <xs:documentation>The text description of the status of the
+						vitality policy. The description is fixed for a given policy
+						status. The status will be like Blue, Bronze, Silver and Gold.</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="0"/>
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="StatusChangdBy" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>Status Changed By</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:complexType name="GetStatusHistoryRequest">
+                <xs:annotation/>
+                <xs:sequence>
+                    <xs:element name="VitalityPolicyNumber" type="VitalityPolicyNumber">
+                        <xs:annotation>
+                            <xs:documentation>This will be used to represent the 10 digit policy number in Vitality.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="StatusType" type="StatusType">
+                        <xs:annotation>
+                            <xs:documentation>Indicates the type of status being requested. All to return all statuses. OverallStatus for Overall Status. CurrentPeriodPointsStatus for the Points Status within each peroid.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="EffFrom" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>Date from which Status history is requested</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="EffTo" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>Date to which Status history is requested</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:element name="GetStatusHistoryRequestMessage">
+                <xs:annotation>
+                    <xs:documentation>This element is the Requestmessage for querying a policy's status history</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="GetStatusHistoryRequest">
+                            <xs:attribute name="schemaVersion" use="required">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:float">
+                                        <xs:minInclusive value="1.0"/>
+                                        <xs:maxExclusive value="2.0"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:complexType name="GetStatusHistoryResponse">
+                <xs:annotation>
+                    <xs:documentation>This element describes the response about a policy's history on status changes.</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="StatusHistory" type="StatusTypeHistory">
+                        <xs:annotation>
+                            <xs:documentation>This element describes a policy's history on status changes</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="StatusTypeHistory">
+                <xs:annotation>
+                    <xs:documentation>This element describes a policy's history on status changes</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="StatusType" type="StatusType">
+                        <xs:annotation>
+                            <xs:documentation>Indicates the type of status being requested. All to return all statuses. OverallStatus for Overall Status. CurrentPeriodPointsStatus for the Points Status within each peroid.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element maxOccurs="unbounded" name="StatusPeriod" type="StatusPeriod">
+                        <xs:annotation>
+                            <xs:documentation>The vitality status of the policy for a given peroid</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="StatusPeriod">
+                <xs:annotation>
+                    <xs:documentation>The vitality status of policy for a given peroid</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="Period" type="Period">
+                        <xs:annotation>
+                            <xs:documentation>The period in which the status is active</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Status" type="Status">
+                        <xs:annotation>
+                            <xs:documentation>The vitality status of the policy</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:element name="GetStatusHistoryResponseMessage">
+                <xs:annotation>
+                    <xs:documentation>This element is the Response message for querying a policy's status history</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="GetStatusHistoryResponse">
+                            <xs:attribute name="schemaVersion" use="required">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:float">
+                                        <xs:minInclusive value="1.0"/>
+                                        <xs:maxExclusive value="2.0"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:element name="OverridePolicyStatusRequestMessage">
+                <xs:annotation>
+                    <xs:documentation>Request message to override status .</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="VitalityPolicyNumber" type="VitalityPolicyNumber">
+                            <xs:annotation>
+                                <xs:documentation>Policy number for the policy for override status.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="VitalityStatusLevel" type="xs:int">
+                            <xs:annotation>
+                                <xs:documentation>The overridden status level for the policy. This element gives status number/code 1,2,3,4 and
+						5</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="EffectiveFrom" type="xs:date">
+                            <xs:annotation>
+                                <xs:documentation>The date from which the Override Status will be in effect</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="EffectiveTo" type="xs:date">
+                            <xs:annotation>
+                                <xs:documentation>The date until which the Override Status will be in effect</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="RequestingUserNumber" type="EntityNumber">
+                            <xs:annotation>
+                                <xs:documentation>The capturing user or system’s entity number</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="schemaVersion" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:float">
+                                <xs:minInclusive value="1.0"/>
+                                <xs:maxExclusive value="2.0"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:element name="OverridePolicyStatusResponseMessage">
+                <xs:annotation>
+                    <xs:documentation>Response message for overriding a policy status.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:annotation>
+                        <xs:documentation>The response element for override policy status</xs:documentation>
+                    </xs:annotation>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="VitalityFaultResponse" type="VitalityFaultResponse">
+                            <xs:annotation>
+                                <xs:documentation>Fault describing a business exception state</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="schemaVersion" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:float">
+                                <xs:minInclusive value="1.0"/>
+                                <xs:maxExclusive value="2.0"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:element name="CaptureRewardStatusesRequestMessage">
+                <xs:annotation>
+                    <xs:documentation>Request message for capturing a reward status.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="30" name="CaptureRewardStatusRequest">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="PolicyNumber" type="VitalityPolicyNumber"/>
+                                    <xs:element name="ApplyRewardStatus" type="YesOrNo"/>
+                                    <xs:element name="TenantIdentifier" type="xs:int"/>
+                                    <xs:element name="EffectiveFrom" type="xs:date"/>
+                                    <xs:element name="EffectiveTo" type="xs:date"/>
+                                </xs:sequence>
+                                <xs:attribute name="correlationNumber" type="xs:long" use="required">
+                                    <xs:annotation>
+                                        <xs:documentation>An identifier for each reward status captured within the 
+										batch being passed to this operation and being unique within that batch. This 
+										id will be returned for the matching capture reward status response.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="schemaVersion" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:float">
+                                <xs:minInclusive value="1.0"/>
+                                <xs:maxExclusive value="2.0"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:element name="CaptureRewardStatusesResponseMessage">
+                <xs:annotation>
+                    <xs:documentation>Response message for capturing a reward status.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="CaptureRewardStatusResponse">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element minOccurs="0" name="CaptureRewardStatusFaultResponse" type="VitalityFaultResponse">
+                                            <xs:annotation>
+                                                <xs:documentation>Fault per status captured (if not present it is assumed that the status was successfully captured)</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="correlationNumber" type="xs:long" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>An identifier for each reward status captured within the 
+										batch being passed to this operation and being unique within that batch. This 
+										id will be returned for the matching capture reward status request.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:element minOccurs="0" name="VitalityFaultResponse" type="VitalityFaultResponse">
+                            <xs:annotation>
+                                <xs:documentation>Fault describing a business exception state</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                    <xs:attribute name="schemaVersion" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:float">
+                                <xs:minInclusive value="1.0"/>
+                                <xs:maxExclusive value="2.0"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:element name="ViewRewardStatusesRequestMessage">
+                <xs:annotation>
+                    <xs:documentation>Request message for viewing a policy's reward statuses.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="10" name="ViewRewardStatusRequest">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="TenantIdentifier" type="xs:int"/>
+                                    <xs:element name="PolicyNumber" type="VitalityPolicyNumber"/>
+                                    <xs:element name="EffectiveDate" type="xs:date"/>
+                                    <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##any"/>
+                                </xs:sequence>
+                                <xs:attribute name="correlationNumber" type="xs:long" use="required">
+                                    <xs:annotation>
+                                        <xs:documentation>An identifier for each reward status captured within the 
+										batch being passed to this operation and being unique within that batch. This 
+										id will be returned for the matching capture reward status response.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="schemaVersion" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:float">
+                                <xs:minInclusive value="1.0"/>
+                                <xs:maxExclusive value="2.0"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:element name="ViewRewardStatusesResponseMessage">
+                <xs:annotation>
+                    <xs:documentation>Response message for viewing a policies' reward statuses.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="ViewRewardStatusResponse">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:choice>
+                                            <xs:sequence>
+                                                <xs:element name="PolicyNumber" type="VitalityPolicyNumber"/>
+                                                <xs:element name="ApplyRewardStatus" type="YesOrNo"/>
+                                                <xs:element name="TenantId" type="xs:int"/>
+                                                <xs:element name="EffectiveFrom" type="xs:date"/>
+                                                <xs:element name="EffectiveTo" type="xs:date"/>
+                                            </xs:sequence>
+                                            <xs:element minOccurs="0" name="ViewRewardStatusFaultResponse" type="VitalityFaultResponse">
+                                                <xs:annotation>
+                                                    <xs:documentation>Fault per reward status requested (if not present it is assumed that the status was successfully retrieved)</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:element>
+                                        </xs:choice>
+                                    </xs:sequence>
+                                    <xs:attribute name="correlationNumber" type="xs:long" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>An identifier for each view reward status
+										request within the
+										batch being passed to this operation and
+										being unique within that
+										batch. This id will be returned for
+										the matching view reward status request.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:element minOccurs="0" name="VitalityFaultResponse" type="VitalityFaultResponse">
+                            <xs:annotation>
+                                <xs:documentation>Fault describing a business exception state</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                    <xs:attribute name="schemaVersion" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:float">
+                                <xs:minInclusive value="1.0"/>
+                                <xs:maxExclusive value="2.0"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:element name="CalculateStatusesRequestMessage">
+                <xs:annotation>
+                    <xs:documentation>Request message for calculating the statuses of a list of policies.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="30" name="CalculateStatusRequest">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="TenantIdentifier" type="xs:int"/>
+                                    <xs:element name="PolicyNumber" type="VitalityPolicyNumber"/>
+                                </xs:sequence>
+                                <xs:attribute name="correlationNumber" type="xs:long" use="required">
+                                    <xs:annotation>
+                                        <xs:documentation>An identifier for each reward status captured within the 
+										batch being passed to this operation and being unique within that batch. This 
+										id will be returned for the matching capture reward status response.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="schemaVersion" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:float">
+                                <xs:minInclusive value="1.0"/>
+                                <xs:maxExclusive value="2.0"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:element name="CalculateStatusesResponseMessage">
+                <xs:annotation>
+                    <xs:documentation>Response message containing a list of results for  calculate statuses.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="CalculateStatusResponse">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element minOccurs="0" name="CalculateStatusFaultResponse" type="VitalityFaultResponse">
+                                            <xs:annotation>
+                                                <xs:documentation>Fault per status captured (if not present it is assumed that the status was successfully captured)</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="correlationNumber" type="xs:long" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>An identifier for each reward status captured within the 
+										batch being passed to this operation and being unique within that batch. This 
+										id will be returned for the matching capture reward status request.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:element minOccurs="0" name="VitalityFaultResponse" type="VitalityFaultResponse">
+                            <xs:annotation>
+                                <xs:documentation>Fault describing a business exception state</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                    <xs:attribute name="schemaVersion" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:float">
+                                <xs:minInclusive value="1.0"/>
+                                <xs:maxExclusive value="2.0"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:element name="InsertPolicyStatusRequestMessage">
+                <xs:annotation>
+                    <xs:documentation>Request to insert a new policy status.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="VitalityPolicyNumber" type="VitalityPolicyNumber">
+                            <xs:annotation>
+                                <xs:documentation>Vitality policy number.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="VitalityStatus" type="xs:int">
+                            <xs:annotation>
+                                <xs:documentation>The status for the policy. This
+							element gives status number/code 1,2,3,4 and
+							5</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="ActionCode" type="xs:int">
+                            <xs:annotation>
+                                <xs:documentation>The action that causes the status to be created.
+							Currently the possible action codes are
+							1 - Status Calc,
+							2 - Manual Override,
+							3 - Status carry over,
+							4 - Staff upgrade,
+							5 - Corporate health status,
+							6 - Default status,
+							7 - General upgrade,
+							8 - Highest earned status,
+							9 - Reward status,
+							10 - Locked in status,
+							11 - Transferred status,</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="OriginCode" type="xs:int">
+                            <xs:annotation>
+                                <xs:documentation>Where does this new status code originate from?
+							Currently the origin codes are
+							1 - Points calc status
+							2 - Partner program status
+							3 - Vitality admin status
+							4 - Diamond status
+							5 - Corp Health status
+							6 - Reward status
+							7 - Transfer status</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="EffectiveFrom" type="xs:date">
+                            <xs:annotation>
+                                <xs:documentation>The date from which the Status will be
+							in effect</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="EffectiveTo" type="xs:date">
+                            <xs:annotation>
+                                <xs:documentation>The date until which the Status will be
+							in effect</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="RequestingUserNumber" type="EntityNumber">
+                            <xs:annotation>
+                                <xs:documentation>The capturing user or system’s entity number</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="schemaVersion" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:float">
+                                <xs:minInclusive value="1.0"/>
+                                <xs:maxExclusive value="2.0"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:element name="InsertPolicyStatusResponseMessage">
+                <xs:annotation>
+                    <xs:documentation>Response message for inserting a new status.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:annotation>
+                        <xs:documentation>Response message for inserting a new status.</xs:documentation>
+                    </xs:annotation>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="VitalityFaultResponse" type="VitalityFaultResponse">
+                            <xs:annotation>
+                                <xs:documentation>Fault describing a business exception state</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="schemaVersion" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:float">
+                                <xs:minInclusive value="1.0"/>
+                                <xs:maxExclusive value="2.0"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:complexType name="GetStatusHistoryWithChangeDateRequest">
+                <xs:annotation/>
+                <xs:sequence>
+                    <xs:element name="VitalityPolicyNumber" type="VitalityPolicyNumber">
+                        <xs:annotation>
+                            <xs:documentation>This will be used to represent the 10 digit policy number in Vitality.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="StatusType" type="StatusType">
+                        <xs:annotation>
+                            <xs:documentation>Indicates the type of status being requested. All to return all statuses. OverallStatus for Overall Status. CurrentPeriodPointsStatus for the Points Status within each peroid.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="EffFrom" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>Date from which Status history is requested</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="EffTo" type="xs:date">
+                        <xs:annotation>
+                            <xs:documentation>Date to which Status history is requested</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:element name="GetStatusHistoryWithChangeDateRequestMessage">
+                <xs:annotation>
+                    <xs:documentation>This element is the Requestmessage for querying a policy's status history</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="GetStatusHistoryWithChangeDateRequest">
+                            <xs:attribute name="schemaVersion" use="required">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:float">
+                                        <xs:minInclusive value="1.0"/>
+                                        <xs:maxExclusive value="2.0"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:complexType name="GetStatusHistoryWithChangeDateResponse">
+                <xs:annotation>
+                    <xs:documentation>This element describes the response about a policy's history on status changes.</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="StatusHistory" type="StatusTypeHistoryWithChangeDateResponse">
+                        <xs:annotation>
+                            <xs:documentation>This element describes a policy's history on status changes</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="StatusTypeHistoryWithChangeDateResponse">
+                <xs:annotation>
+                    <xs:documentation>This element describes a policy's history on status changes</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="StatusType" type="StatusType">
+                        <xs:annotation>
+                            <xs:documentation>Indicates the type of status being requested. All to return all statuses. OverallStatus for Overall Status. CurrentPeriodPointsStatus for the Points Status within each peroid.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element maxOccurs="unbounded" name="StatusPeriod" type="StatusPeriodWithChangeDateResponse">
+                        <xs:annotation>
+                            <xs:documentation>The vitality status of the policy for a given peroid</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="StatusPeriodWithChangeDateResponse">
+                <xs:annotation>
+                    <xs:documentation>The vitality status of policy for a given peroid</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                    <xs:element name="PeriodWithChangeDateResponse" type="PeriodWithChangeDateResponse">
+                        <xs:annotation>
+                            <xs:documentation>The period in which the status is active</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Status" type="StatusWithChangedBy">
+                        <xs:annotation>
+                            <xs:documentation>The vitality status of the policy</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns="http://schemas.discovery.co.za/vitality" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality">
+            <xs:element name="GetStatusHistoryWithChangeDateResponseMessage">
+                <xs:annotation>
+                    <xs:documentation>This element is the Response message for querying a policy's status history along with Status change date</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="GetStatusHistoryWithChangeDateResponse">
+                            <xs:attribute name="schemaVersion" use="required">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:float">
+                                        <xs:minInclusive value="1.0"/>
+                                        <xs:maxExclusive value="2.0"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="GetStatusHistoryRequestMessage">
+        <wsdl:part element="sch10:GetStatusHistoryRequestMessage" name="GetStatusHistoryRequestMessage"/>
+    </wsdl:message>
+    <wsdl:message name="GetStatusHistoryResponseMessage">
+        <wsdl:part element="sch10:GetStatusHistoryResponseMessage" name="GetStatusHistoryResponseMessage"/>
+    </wsdl:message>
+    <wsdl:message name="OverridePolicyStatusRequestMessage">
+        <wsdl:part element="sch10:OverridePolicyStatusRequestMessage" name="OverridePolicyStatusRequestMessage"/>
+    </wsdl:message>
+    <wsdl:message name="OverridePolicyStatusResponseMessage">
+        <wsdl:part element="sch10:OverridePolicyStatusResponseMessage" name="OverridePolicyStatusResponseMessage"/>
+    </wsdl:message>
+    <wsdl:message name="InsertPolicyStatusRequestMessage">
+        <wsdl:part element="sch10:InsertPolicyStatusRequestMessage" name="InsertPolicyStatusRequestMessage"/>
+    </wsdl:message>
+    <wsdl:message name="InsertPolicyStatusResponseMessage">
+        <wsdl:part element="sch10:InsertPolicyStatusResponseMessage" name="InsertPolicyStatusResponseMessage"/>
+    </wsdl:message>
+    <wsdl:message name="GetStatusHistoryWithChangeDateRequestMessage">
+        <wsdl:part element="sch10:GetStatusHistoryWithChangeDateRequestMessage" name="GetStatusHistoryWithChangeDateRequestMessage"/>
+    </wsdl:message>
+    <wsdl:message name="GetStatusHistoryWithChangeDateResponseMessage">
+        <wsdl:part element="sch10:GetStatusHistoryWithChangeDateResponseMessage" name="GetStatusHistoryWithChangeDateResponseMessage"/>
+    </wsdl:message>
+    <wsdl:message name="CaptureRewardStatusesRequestMessage">
+        <wsdl:part element="sch10:CaptureRewardStatusesRequestMessage" name="CaptureRewardStatusesRequestMessage"/>
+    </wsdl:message>
+    <wsdl:message name="CaptureRewardStatusesResponseMessage">
+        <wsdl:part element="sch10:CaptureRewardStatusesResponseMessage" name="CaptureRewardStatusesResponseMessage"/>
+    </wsdl:message>
+    <wsdl:message name="ViewRewardStatusesRequestMessage">
+        <wsdl:part element="sch10:ViewRewardStatusesRequestMessage" name="ViewRewardStatusesRequestMessage"/>
+    </wsdl:message>
+    <wsdl:message name="ViewRewardStatusesResponseMessage">
+        <wsdl:part element="sch10:ViewRewardStatusesResponseMessage" name="ViewRewardStatusesResponseMessage"/>
+    </wsdl:message>
+    <wsdl:message name="CalculateStatusesRequestMessage">
+        <wsdl:part element="sch10:CalculateStatusesRequestMessage" name="CalculateStatusesRequestMessage"/>
+    </wsdl:message>
+    <wsdl:message name="CalculateStatusesResponseMessage">
+        <wsdl:part element="sch10:CalculateStatusesResponseMessage" name="CalculateStatusesResponseMessage"/>
+    </wsdl:message>
+    <wsdl:portType name="StatusManager">
+        <wsdl:operation name="GetStatusHistory">
+            <wsdl:input message="tns:GetStatusHistoryRequestMessage" name="GetStatusHistoryRequestMessage"/>
+            <wsdl:output message="tns:GetStatusHistoryResponseMessage" name="GetStatusHistoryResponseMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="OverridePolicyStatus">
+            <wsdl:input message="tns:OverridePolicyStatusRequestMessage" name="OverridePolicyStatusRequestMessage"/>
+            <wsdl:output message="tns:OverridePolicyStatusResponseMessage" name="OverridePolicyStatusResponseMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="InsertPolicyStatus">
+            <wsdl:input message="tns:InsertPolicyStatusRequestMessage" name="InsertPolicyStatusRequestMessage"/>
+            <wsdl:output message="tns:InsertPolicyStatusResponseMessage" name="InsertPolicyStatusResponseMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetStatusHistoryWithChangeDate">
+            <wsdl:input message="tns:GetStatusHistoryWithChangeDateRequestMessage" name="GetStatusHistoryWithChangeDateRequestMessage"/>
+            <wsdl:output message="tns:GetStatusHistoryWithChangeDateResponseMessage" name="GetStatusHistoryWithChangeDateResponseMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="CaptureRewardStatuses">
+            <wsdl:input message="tns:CaptureRewardStatusesRequestMessage" name="CaptureRewardStatusesRequestMessage"/>
+            <wsdl:output message="tns:CaptureRewardStatusesResponseMessage" name="CaptureRewardStatusesResponseMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="ViewRewardStatuses">
+            <wsdl:input message="tns:ViewRewardStatusesRequestMessage" name="ViewRewardStatusesRequestMessage"/>
+            <wsdl:output message="tns:ViewRewardStatusesResponseMessage" name="ViewRewardStatusesResponseMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="CalculateStatuses">
+            <wsdl:input message="tns:CalculateStatusesRequestMessage" name="CalculateStatusesRequestMessage"/>
+            <wsdl:output message="tns:CalculateStatusesResponseMessage" name="CalculateStatusesResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="StatusManagerSoap11" type="tns:StatusManager">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetStatusHistory">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="GetStatusHistoryRequestMessage">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="GetStatusHistoryResponseMessage">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="OverridePolicyStatus">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="OverridePolicyStatusRequestMessage">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="OverridePolicyStatusResponseMessage">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="InsertPolicyStatus">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="InsertPolicyStatusRequestMessage">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="InsertPolicyStatusResponseMessage">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetStatusHistoryWithChangeDate">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="GetStatusHistoryWithChangeDateRequestMessage">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="GetStatusHistoryWithChangeDateResponseMessage">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CaptureRewardStatuses">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="CaptureRewardStatusesRequestMessage">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="CaptureRewardStatusesResponseMessage">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ViewRewardStatuses">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="ViewRewardStatusesRequestMessage">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="ViewRewardStatusesResponseMessage">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CalculateStatuses">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="CalculateStatusesRequestMessage">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="CalculateStatusesResponseMessage">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="StatusManagerService">
+        <wsdl:port binding="tns:StatusManagerSoap11" name="StatusManagerSoap11">
+            <soap:address location="http://avtvitcore01.aiavitality.com:7001/StatusManager/status-service/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
