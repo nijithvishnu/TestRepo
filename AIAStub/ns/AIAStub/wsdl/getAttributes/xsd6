@@ -1,0 +1,30 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.discovery.co.za/vitality" targetNamespace="http://schemas.discovery.co.za/vitality" elementFormDefault="qualified" version="1.0">
+   <xs:include schemaLocation="AIAStub.wsdl.getAttributes?xsd=xsd4"/>
+   <xs:complexType name="RequestContext">
+      <xs:sequence>
+         <xs:element type="EntityNumber" name="EntityNumber" minOccurs="1"/>
+         <xs:element type="Period" name="Period" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>If period is not defined then return all results in descending order.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Period">
+      <xs:sequence>
+         <xs:element type="xs:dateTime" name="FromDate" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+               <xs:documentation>If fromDate is set and toDate is set, then return results from the fromDate to the toDate in descending order.
+            If fromDate is set and toDate is not set, then return results from the fromDate with attributes in ascending order.
+            If fromDate is not set and toDate is not set, then return all results in descending order.
+            If toDate is set and fromDate is not set, then return results from the toDate with attributes in descending order.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element type="xs:dateTime" name="ToDate" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+               <xs:documentation>See fromDate documentation.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>
