@@ -30,9 +30,11 @@ pipeline {
 		stage("Test") {
             steps {
                 echo "Test Started..."
-			    bat "C:/Users/nivi/AppData/Roaming/npm/newman.cmd run C:/Users/nivi/Desktop/AIAVE.postman_collection.json"
+			    bat 'start cmd.exe /c newman run C:/Users/nivi/Desktop/AIAVE.postman_collection.json'
             }
         }
         
     }     
 }
+
+      
