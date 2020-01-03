@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns="http://attributeHistoryService.service.wellness.vitality.discovery.co.za" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:tns3="http://schemas.discovery.co.za/vitality" xmlns:tns4="http://schemas.discovery.co.za/vitality" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://attributeHistoryService.service.wellness.vitality.discovery.co.za">
+
+   <wsdl:types>
+
+      <xsd:schema xmlns="http://schemas.discovery.co.za/vitality" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality" version="1.0">
+
+         <xsd:include schemaLocation="AIAStub.wsdl.getAttributes?xsd=xsd0"/>
+
+      </xsd:schema>
+
+      <xsd:schema xmlns="http://schemas.discovery.co.za/vitality" elementFormDefault="qualified" targetNamespace="http://schemas.discovery.co.za/vitality" version="1.0">
+
+         <xsd:include schemaLocation="AIAStub.wsdl.getAttributes?xsd=xsd7"/>
+
+      </xsd:schema>
+
+   </wsdl:types>
+
+   <wsdl:message name="processAttributeHistoryRequestRequest">
+
+      <wsdl:part element="tns3:AttributeHistoryRequestMessage" name="AttributeHistoryRequestMessage"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="processAttributeHistoryRequestResponse">
+
+      <wsdl:part element="tns4:AttributeHistoryResponseMessage" name="AttributeHistoryResponseMessage"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="invalidServerDataFault">
+
+      <wsdl:part name="error" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="AttributeHistoryService">
+
+      <wsdl:operation name="processAttributeHistoryRequest">
+
+         <wsdl:input message="processAttributeHistoryRequestRequest" name="processAttributeHistoryRequestRequest"/>
+
+         <wsdl:output message="processAttributeHistoryRequestResponse" name="processAttributeHistoryRequestResponse"/>
+
+         <wsdl:fault message="invalidServerDataFault" name="invalidServerDataFault"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+
+   <wsdl:binding name="AttributeHistoryServiceSoapBinding" type="AttributeHistoryService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="processAttributeHistoryRequest">
+
+         <wsdlsoap:operation soapAction="processAttributeHistoryRequest"/>
+
+         <wsdl:input>
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output>
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="invalidServerDataFault">
+
+            <wsdlsoap:fault name="invalidServerDataFault" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="AttributeHistoryServiceService">
+
+      <wsdl:port binding="AttributeHistoryServiceSoapBinding" name="AttributeHistoryService">
+
+         <wsdlsoap:address location="http://avtvitcore01.aiavitality.com:7001/Vitality/Wellness/services/AttributeHistoryService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

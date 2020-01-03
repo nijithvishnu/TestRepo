@@ -1,0 +1,40 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.discovery.co.za/vitality" targetNamespace="http://schemas.discovery.co.za/vitality" elementFormDefault="qualified" version="1.0">
+   <xs:include schemaLocation="AIAStub.wsdl.getAttributes?xsd=xsd3"/>
+   <xs:complexType name="Question">
+      <xs:sequence>
+         <xs:element name="Identifier" type="IdentifierKey"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="QuestionAnswerValue">
+      <xs:simpleContent>
+         <xs:extension base="xs:string">
+            <xs:attribute name="mapped" type="xs:boolean" use="optional">
+               <xs:annotation>
+                  <xs:documentation>Defines whether the value is to be interpreted as a literal or a mapped value i.e. the value 'DontKnow' is not that actual value but is the mapped value, which the client needs to interpret further.
+              mapped=true means value is mapped,
+              mapped=false means value is a literal value.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:simpleType name="AssessmentType">
+      <xs:annotation>
+         <xs:documentation>This is the id of the type of assessment group e.g. HRA, VR etc.</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="64"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="AssessmentSource">
+      <xs:annotation>
+         <xs:documentation>Indicator of Trusted vs non trusted sources.</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="NormalisedToken">
+         <xs:maxLength value="32"/>
+         <xs:enumeration value="DontCare"/>
+         <xs:enumeration value="Trusted"/>
+         <xs:enumeration value="UnTrusted"/>
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>
