@@ -1,8 +1,0 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.discovery.co.za/vitality" targetNamespace="http://schemas.discovery.co.za/vitality" elementFormDefault="qualified" version="1.0">
-   <xs:include schemaLocation="AIAStub.wsdl.getAttributes?xsd=xsd4"/>
-   <xs:simpleType name="IdentifierKey">
-      <xs:restriction base="NormalisedToken">
-         <xs:maxLength value="64"/>
-      </xs:restriction>
-   </xs:simpleType>
-</xs:schema>
